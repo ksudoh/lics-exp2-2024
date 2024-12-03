@@ -54,7 +54,7 @@ ls -l ${EXPDIR}
 cd ${EXPDIR}
 python3 -m venv --prompt exp2_2024_nlp .venv
 ```
-これで `${WORKDIR}/.venv` というディレクトリに `exp_2024_nlp` という名前の仮想環境が作成されます。
+これで `${EXPDIR}/.venv` というディレクトリに `exp_2024_nlp` という名前の仮想環境が作成されます。
 
 仮想環境は作成するだけでは不十分で、仮想環境を有効化 (activate) しなければなりません。
 この仮想環境を利用する際には必ず以下のコマンドを実行してください。
@@ -93,4 +93,22 @@ pip3 install unidic-lite
 今回の実験で利用する文書分類用のデータとして[WRIME: 主観と客観の感情分析データセット](https://github.com/ids-cv/wrime)を利用します。
 ライセンスの関係で前処理済みのデータの再配布ができないので、公開されているデータのコピーに対して皆さんのお手元で前処理を実行して利用する必要があります。
 
-まず、
+### 4.1 前処理スクリプトの作成
+まず、[前処理用のPythonスクリプト](https://github.com/ksudoh/lics-exp2-2024/blob/main/11Dec/scripts/extract_wrime_v2_data.py)のコピーを作成します。
+以下のいずれかの方法で行ってみてください。
+- GitHubの画面を見ながら写経する
+- GitHubの画面で Copy raw file のボタンをクリックしてクリップボードにコピーし、何かのエディタで開いて貼り付ける
+- 須藤のディレクトリにある `/export/home/ics/sudoh/Project/Exp2/2024/scripts/extract_wrime_v2_data.py` をコピーする
+このファイルは `${EXPDIR}/scripts/extract_wrime_v2_data.py` として保存します。
+
+### 4.2 前処理済みデータ格納用ディレクトリの作成
+前処理済みのデータを格納するためのディレクトリを作成します。
+```
+mkdir -p ${EXPDIR}/data
+```
+
+### 4.3 前処理スクリプトの実行
+以下のように前処理スクリプトを実行し、WRIME v2のデータの必要な箇所だけを抜き取り、JSON形式で格納したファイルを作成します。
+```
+python3 ${EXPDIR}/scripts/extract_wrime_v2_data.py -t ${EXPDIR}/data/wrime_v2_sentiment.tok.json
+```
