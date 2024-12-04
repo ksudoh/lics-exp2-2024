@@ -112,3 +112,11 @@ mkdir -p ${EXPDIR}/data
 ```
 python3 ${EXPDIR}/scripts/extract_wrime_v2_data.py -t ${EXPDIR}/data/wrime_v2_sentiment.tok.json
 ```
+
+実行の結果、`${EXPDIR}/data/wrime_v2_sentiment.tok.json` というファイルが生成されるはずです。
+
+また、比較のため分かち書きを行っていない形式のファイルも作成しておきます。
+（余力のある人はこのデータを使った実験にもトライしてみてください）
+```
+python3 ${EXPDIR}/scripts/extract_wrime_v2_data.py ${EXPDIR}/data/wrime_v2_sentiment.json
+```
